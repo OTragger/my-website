@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="img-shower pt-md-5 w-100">
+        <img class="w-100" src="{{project.mainImage.url}}" alt="">
+    </div>
+    <div class="container-fluid">
+        <div class="container py-5" id="project-details">
+            <div class="row justify-content-center-align-items-center">
+                <div class="col-12 col-lg-4">
+                    <div class="row pb-5">
+                        <div class="">
+                            <p class="display-6 playfair border-bottom d-inline-block">{{project.title}}</p>
+                        </div>
+                        <div class="py-3">
+                            <div class="row">
+                                <div class="col-6">
+                                    <p class="fs-4 playfair m-0">Client</p>
+                                    <p class="fs-6">{{project.client}}</p>
+                                </div>
+                                <div class="col-6">
+                                    <p class="fs-4 playfair m-0">Categories</p>
+                                    <p class="fs-6">{{categories}}</p>
+                                </div>
+                                <div class="col-6">
+                                    <p class="fs-4 playfair m-0">Date</p>
+                                    <p class="fs-6">{{project.date}}</p>
+                                </div>
+                                <div class="col-6">
+                                    <p class="fs-4 playfair m-0">Contributors</p>
+                                    <p class="fs-6">{{contributors}}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class=""><a href="{% url 'projects:all_projects' %}" class="btn bg-orange text-white">Back To Projects</a></div>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-8">
+                    <p class="fs-3 fw-bold">Project Summary</p>
+                    <p>{{project.summary|linebreaks}}</p>
+                    {% if project.website != '' %}
+                        <a href={{project.website}} class="text-orange">Visit their website <i class="bi bi-arrow-right"></i></a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        <div class="pb-5 container" id="imagery">
+            <div class="image-container">
+                {% for projectImage in projectImages %}
+                    <img class="rounded proj-img" src="{{ projectImage.url }}" alt="{{ projectImage.name }}">
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    <div id="view-image" class="py-5 m-0 d-none">
+        <span class="my-tool-tip" data-ba-position="bottom" title="Close">
+            <i class="bi bi-x text-orange fs-1" id="close-icon"></i>
+        </span>
+        <img id="view-image-img" class="w-100 rounded" src="" alt="">
+    </div>
+{% endblock %}

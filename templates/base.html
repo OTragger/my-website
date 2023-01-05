@@ -1,0 +1,248 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" 
+        content="As web developer and designer, my work consists in creating web contents 
+        (copies, images, videos, etc), creating encoding the actual website, and then 
+        testing and deploying them">
+    <meta name="author" content="Oswald Houndekon">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static 'css/aos.css' %}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <title>Oswald Houndekon | {{page_title}} </title>
+</head>
+
+<body class='bg-black text-light'>
+    <div class="wrapper">
+        <img src="" class="wrapper-content-container">
+        <div class="progress">
+            <div id="liquid"></div>
+        </div>
+    </div>
+
+    <div class="my-nav-menu" >
+        <div class="wrapping">
+            <ul>
+                <li class="py-4"><a data-after="Home" class="display-3 fw-bold playfair" href="{% url 'homepage' %}">Home</a></li>
+                <li class="py-4"><a data-after="Projects" class="display-3 fw-bold playfair" href="{% url 'projects:all_projects' %}">Projects</a></li>
+                <li class="py-4"><a data-after="Contact" class="display-3 fw-bold playfair" href="{% url 'contact' %}">Contact</a></li>
+                <li class="py-4"><a data-after="Privacy Policy" class="display-3 fw-bold playfair" href="{% url 'privacy_policy' %}">Privacy Policy</a></li>
+            </ul>
+            <div data-after="Close" class="closeNav d-flex justify-content-center align-items-center p-3">
+                <span class="text-white fs-2"><i class="bi bi-x"></i></span>
+            </div>
+        </div>
+    </div>
+    <div class="back-to-top d-flex justify-content-center align-items-center p-3">
+        <a href="#my-nav"><span class="text-white fs-2"><i class="bi bi-arrow-up-circle"></i></span></a>
+    </div>
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-black" id="my-nav">
+        <div class="container-fluid">
+            <div class="container">
+                <div class="row justify-content-center align-items-center">
+                    <div class="col d-none d-md-block">
+                        <div class="row justify-content-start align-items-center text-center">
+                            <div class="col-md-2 p-2">
+                                <span class="my-tool-tip" data-bs-placement="top" title="Follow me on facebook">
+                                    <a class="my-link" target="_blank" rel="noopener noreferrer" href="https://www.facebook.com/oswaldtragger/">
+                                        <img width="10" src="{% static 'fb-icon.svg' %}" alt="">
+                                    </a>
+                                </span>
+                            </div>
+                            <div class="col-md-2 p-2">
+                                <span class="my-tool-tip" data-bs-placement="top" title="Follow me on instagram">
+                                    <a class="my-link" target="_blank" rel="noopener noreferrer" href="https://www.instagram.com/oswaldtragger/">
+                                        <img width="16" src="{% static 'ig-icon.svg' %}" alt="">
+                                    </a>
+                                </span>
+                            </div>
+                            <div class="col-md-2 p-2">
+                                <span class="my-tool-tip" data-bs-placement="top" title="Follow me on behance">
+                                    <a class="my-link" target="_blank" rel="noopener noreferrer" href="https://www.behance.com/oswaldtragger/">
+                                        <img width="16" src="{% static 'behance-icon.svg' %}" alt="">
+                                    </a>
+                                </span>
+                            </div>
+                            <div class="col-md-2 p-2">
+                                <span class="my-tool-tip" data-bs-placement="top" title="Follow me on twitter">
+                                    <a class="my-link" target="_blank" rel="noopener noreferrer" href="https://www.twitter.com/oswaldtragger/">
+                                        <img width="16" src="{% static 'twitter-icon.svg' %}" alt="">
+                                    </a>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col text-center">
+                        <a class="navbar-brand" href="{% url 'homepage' %}"><img class="logo-white" src="{% static 'web-logo.svg' %}" alt=""></a>
+                    </div>
+                    <div class="col">
+                        <div class="row justify-content-end align-items-center">
+                            <div class="col-2">
+                                <img id="hamburger_menu" width="16" src="{% static 'hamburger-menu-icon.svg' %}" alt="">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    {% block content %}
+
+    {% endblock %}
+
+    <section class="container-fluid py-5 contact bg-orange">
+        <div class="container text-center">
+            <p class="h3 cormorant">Get in touch</p>
+            <p class="display-6"> Let's maximise your brand's potential</p>
+            <a href="{% url 'contact' %}" class="text-white fs-5">Find out more</a>
+        </div>
+    </section>
+
+    <section class="container-fluid py-5 footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-md">
+                    <div class="row justifiy-content-center justify-content-md-start text-center text-md-start">
+                        <div><img class="logo-white" src="{% static 'web-logo.svg' %}" alt=""></div>
+                        <p class="my-3">Educating people about their brand stories, identity, design and business.
+                            Through creative excellence, I aim at transforming brands into sustainable success stories
+                            that inspire customers and employees.</p>
+                        <div class="d-flex justify-content-center justify-content-md-start align-items-center">
+                            <span class="my-tool-tip" data-bs-placement="top" title="Home page">
+                                <a class="my-link text-white text-decoration-none mt-2 mtb-2 me-3" href="{% url 'homepage' %}">Home</a>
+                            </span>
+                            <span class="my-tool-tip" data-bs-placement="top" title="Projects">
+                                <a class="my-link text-white text-decoration-none mt-2 mtb-2 me-3" href="{% url 'projects:all_projects' %}">Projects</a>
+                            </span>
+                            <span class="my-tool-tip" data-bs-placement="top" title="Contact me">
+                                <a class="my-link text-white text-decoration-none mt-2 mtb-2 me-3" href="{% url 'contact' %}">Contact</a>
+                            </span>
+                            <span class="my-tool-tip" data-bs-placement="top" title="Privacy policy">
+                                <a class="my-link text-white text-decoration-none mt-2 mtb-2 me-3" href="{% url 'privacy_policy' %}">Privacy Policy</a>
+                            </span>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-12 col-md">
+                    <div class="row justify-content-center justify-content-md-end my-2 text-center text-md-end">
+                        <div class="col">
+                            <div class="d-flex justify-content-center justify-content-md-end align-items-center">
+                                <a class="my-link" target="_blank" rel="noopener noreferrer" href="https://www.facebook.com/oswaldtragger/">
+                                    <span class="my-tool-tip" data-bs-placement="top" title="Follow me on facebook">
+                                        <img class="m-3" width="10" src="{% static 'fb-icon.svg' %}" alt="">
+                                    </span>
+                                </a>
+                                <a class="my-link" target="_blank" rel="noopener noreferrer" href="https://www.instagram.com/oswaldtragger/">
+                                    <span class="my-tool-tip" data-bs-placement="top" title="Follow me on instagram">
+                                        <img class="m-3" width="16" src="{% static 'ig-icon.svg' %}" alt="">
+                                    </span>
+                                </a>
+                                <a class="my-link" target="_blank" rel="noopener noreferrer" href="https://www.behance.com/oswaldtragger/">
+                                    <span class="my-tool-tip" data-bs-placement="top" title="Follow me on behance">
+                                        <img class="m-3" width="16" src="{% static 'behance-icon.svg' %}" alt="">
+                                    </span>
+                                </a>
+                                <a class="my-link" target="_blank" rel="noopener noreferrer" href="https://www.twitter.com/oswaldtragger/">
+                                    <span class="my-tool-tip" data-bs-placement="top" title="Follow me on twitter">
+                                        <img class="m-3" width="16" src="{% static 'twitter-icon.svg' %}" alt="">
+                                    </span>
+                                </a>
+                            </div>
+                        </div>
+                        <a class="my-link text-white text-decoration-none m-3"
+                            href="mailto:oswaldhoundekon@gmail.com">oswaldhoundekon@gmail.com</a>
+                    </div>
+
+                </div>
+            </div>
+            <p class="pt-5 text-light text-center">Copyright © 2022 Oswald Houndekon All rights reserved.</p>
+        </div>
+    </section>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.min.js" integrity="sha384-IDwe1+LCz02ROU9k972gdyvl+AESN10+x7tBKgc9I5HFtuNz0wWnPclzo6p9vxnk" crossorigin="anonymous"></script>
+    <script src="{% static 'js/aos.js' %}"></script>
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+    <script>
+        $('document').ready(function(){
+
+            //initialize animate on scroll
+            AOS.init();
+
+            //initialize loader
+            function getRandomNumber(min, max) {
+                return Math.floor(Math.random() * (max - min) + min + 1);
+            }
+        
+            setTimeout(() => { $('.wrapper').slideUp() }, 2000);
+            var num = getRandomNumber(1, 11).toString();
+            var url = "/static/loader/Saly-"+num+".png";
+            $('.wrapper-content-container').attr('src', url);
+            $('#liquid').addClass('liquid');
+
+            //sets up frosty class on nav bar
+            var prevScrollpos = window.pageYOffset;
+            window.onscroll = function() {
+    
+                var currentScrollPos = window.pageYOffset; // current scroll position
+                
+                if(currentScrollPos == 0 || prevScrollpos > currentScrollPos){
+                    $("#my-nav").removeClass("bg-frosty");
+                } else {
+                    $("#my-nav").addClass("bg-frosty");
+                }
+                prevScrollpos = currentScrollPos;
+              }
+
+            // interaction with navigation menu
+            $('#hamburger_menu').on('click',function(){
+                //$('.my-nav-menu').show();
+                $('.my-nav-menu').slideDown();
+            });
+            $('.closeNav').on('click',function(){
+                $('.my-nav-menu').slideUp();
+            });
+
+
+
+            //contact me form checkbox
+            $('#agree-with-privacy-policy').change(function(){
+                if($(this).is(':checked') && $('#name').val()!="" && $('#company-name').val()!="" && $('#email').val()!="" && $('#service').val()!="" && $('#project-details').val()!=""){
+                    $('#contact-me-submit').removeAttr('disabled');
+                }
+                else{
+                    $('#contact-me-submit').prop('disabled',true);
+                }
+            });
+
+            $(".proj-img").click((e)=>{
+                //get image base source
+
+                var img_src = e.target.currentSrc;
+                //display fullscreen pic
+                $('#view-image-img').attr('src', img_src);
+                $('#view-image').toggleClass('d-none img-visible d-flex justify-content-center align-items-center');
+                $('window').preventScroll();
+            });
+
+            $("#close-icon").click((e)=>{
+                $('#view-image').toggleClass('d-none img-visible d-flex justify-content-center align-items-center');
+            });
+            
+            //working with tooltip
+            $.each($('.my-tool-tip'),(t)=>{new bootstrap.Tooltip(t)});
+        });
+    
+    </script>
+    <script src="{% static 'js/script.js' %}"></script>
+</body>
+
+</html>
