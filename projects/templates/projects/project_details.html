@@ -11,7 +11,7 @@
                 <div class="col-12 col-lg-4">
                     <div class="row pb-5">
                         <div class="">
-                            <p class="display-6 playfair border-bottom d-inline-block">{{project.title}}</p>
+                            <p class="display-6 playfair border-bottom d-inline-block" data-name="{{project.title}}" id='project-name'>{{project.title}}</p>
                         </div>
                         <div class="py-3">
                             <div class="row">
@@ -32,6 +32,10 @@
                                     <p class="fs-6">{{contributors}}</p>
                                 </div>
                             </div>
+                            <div class="my-2">
+                                <p class="my-3 mx-1 d-inline rounded-pill px-3 py-1 project-tag">{{tags}}</p>
+                            </div>
+                            
                         </div>
                         <div class=""><a href="{% url 'projects:all_projects' %}" class="btn bg-orange text-white">Back To Projects</a></div>
                     </div>
@@ -53,10 +57,68 @@
             </div>
         </div>
     </div>
+
+    <div class="container-fluid py-5">
+        <div class="container rounded py-5 px-1 p-md-5 d-flex" data-mouse-down-at-y='0' data-mouse-down-at-x='0' id='next-project'>
+            <div class="py-md-3 row w-100">
+                <div class="col d-flex justify-content-start">
+                    {% if previous_project %}
+                        <a id="previous_project_link" href="{% url 'projects:details' slug=previous_project.slug %}" class="btn btn-outline-danger btn-sm"><i class="bi bi-arrow-left"></i> <span class="d-none d-md-inline">See previous project</span></a>
+                    {% endif %}
+                </div>
+                <div class="col d-flex justify-content-end">
+                    {% if next_project %}
+                        <a id="next_project_link" href="{% url 'projects:details' slug=next_project.slug %}" class="btn btn-outline-danger btn-sm"><span class="d-none d-md-inline">See next project</span> <i class="bi bi-arrow-right"></i></a>
+                    {% else %}
+                        <p class="btn btn-outline-orange m-0">New project coming...</p>
+                    {% endif %}
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+    <style>
+        #next-project{
+            background-image: url("{{project.mainImage.url|safe}}");
+            background-size:cover;
+            background-repeat: no-repeat;
+            background-position: center center;
+        }
+    </style>
+
+
+    {% comment %} view image box {% endcomment %}
     <div id="view-image" class="py-5 m-0 d-none">
         <span class="my-tool-tip" data-ba-position="bottom" title="Close">
             <i class="bi bi-x text-orange fs-1" id="close-icon"></i>
         </span>
         <img id="view-image-img" class="w-100 rounded" src="" alt="">
     </div>
+
+
+    <script>
+        var nextProjectLink = document.querySelector('#next_project_link');
+        var nextProjectImg =  `{{ next_project.mainImage.url|safe }}`;
+        var previousProjectLink = document.querySelector('#previous_project_link');
+        var previousProjectImg = `{{previous_project.mainImage.url|safe}}`;
+        var currentImg = `{{project.mainImage.url|safe}}`;
+
+        console.log(nextProjectImg);
+        console.log(previousProjectImg);
+        console.log(currentImg);
+
+
+        nextProjectLink.addEventListener('mouseenter',function(){
+            document.querySelector('#next-project').style.backgroundImage = `url(${nextProjectImg})`;
+        });
+        previousProjectLink.addEventListener('mouseenter',function(){
+            document.querySelector('#next-project').style.backgroundImage = `url(${previousProjectImg})`;
+        });
+        nextProjectLink.addEventListener('mouseleave',function(){
+            document.querySelector('#next-project').style.backgroundImage = `url(${currentImg})`;
+        });
+        previousProjectLink.addEventListener('mouseleave',function(){
+            document.querySelector('#next-project').style.backgroundImage = `url(${currentImg})`;
+        });
+    </script>
 {% endblock %}

@@ -4,7 +4,7 @@ from projects.models import Project
 from django.core.mail import send_mail
 
 def index(request):
-    works = Project.objects.all()[:6]
+    works = Project.objects.all()[:7]
     return render(request, 'index.html', {'works':works, 'range':range(4), 'page_title':'Home'})
 
 

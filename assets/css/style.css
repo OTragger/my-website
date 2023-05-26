@@ -47,8 +47,27 @@
     }
 }
 
+.project-tag{
+    border: 1px solid rgb(241, 85, 165);
+    background-color: rgba(241, 85, 166, 0.359);
+    color: white;
+}
+
+
 .bg-orange{
     background-color: #ee4f22;
+}
+
+.bg-outline-orange{
+    border: solid 1px #ee4f22 !important;
+    color: #ee4f22 !important;
+    background-color: transparent !important;
+}
+
+.bg-outline-orange:hover{
+    border: solid 1px #ee4f22 !important;
+    color: white !important;
+    background-color: #ee4f22 !important;
 }
 
 .btn-orange{

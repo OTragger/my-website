@@ -2,6 +2,7 @@ import random as r
 from django.db import models
 from django.db.models.signals import pre_delete
 from django.dispatch.dispatcher import receiver
+from slugify import slugify
 
 
 
@@ -16,11 +17,17 @@ class Category(models.Model):
 
 class Contributor(models.Model):
     name = models.CharField(max_length=50)
-    picture = models.ImageField()
+    picture = models.ImageField(default='default_contributor.png')
     
     def __str__(self):
         return self.name
     
+    
+class Tag(models.Model):
+    tag = models.CharField(max_length=100)
+    
+    def __str__(self):
+        return self.tag
     
     
 class Project(models.Model):
@@ -38,9 +45,14 @@ class Project(models.Model):
     contributors = models.ManyToManyField(Contributor)
     mainImage = models.ImageField(upload_to = main_image_upload, blank = True)
     slug = models.SlugField(default='link')
+    tags = models.ManyToManyField(Tag, blank=True)
     
     def __str__(self):
         return self.title
+    
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.title)
+        super().save(*args, **kwargs)
     
     
 
@@ -60,6 +72,8 @@ class ProjectImages(models.Model):
     
     def __str__(self):
         return self.name
+    
+
     
   
 #this is to handle the deletion action on video model

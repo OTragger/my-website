@@ -1,129 +1,83 @@
 //Oswald HOUNDEKON 2022
 
-canvas = document.getElementsByTagName("canvas")[0];
-canvas.width = document.body.clientWidth;
-canvas.height = document.body.clientHeight;
 
-var ctx = canvas.getContext("2d");
 
-/*Modify options here*/
 
-//possible characters that will appear
-var characterList = [
-    "html",
-    "css",
-    "js",
-    "python",
-    "illustrator",
-    "photoshop",
-    "xd",
-    "branding",
-    "php",
-    "flask",
-    "django",
-    "design"
-];
 
-//stocks possible character attributes
-var layers = {
-    n: 5, //number of layers
-    letters: [15, 10, 5, 3, 4], //letters per layer (starting from the deepest layer)
-    coef: [0.1, 0.2, 0.4, 0.6, 0.8], //how much the letters move from the mouse (starting from the deepest layer)
-    size: [16, 22, 36, 40, 46], //font size of the letters (starting from the deepest layer)
-    color: ["#ed977f", "#ee4f22", "#ccc", "#7e321e", "#aaa"], //color of the letters (starting from the deepest layer)
-    font: "Courier" //font family (of every layer)
-};
+/////////////////////////////////////////////////////// project details page
 
-/*End of options*/
+//next project section 
 
-var characters = [];
-var mouseX = document.body.clientWidth / 2;
-var mouseY = document.body.clientHeight / 2;
+var parallaxBox = document.querySelector('#next-project');
+var nextProjectLink = document.querySelector('#next_project_link');
+var previousProjectLink = document.querySelector('#previous_project_link');
 
-var rnd = {
-    btwn: function (min, max) {
-        return Math.floor(Math.random() * (max - min) + min);
-    },
-    choose: function (list) {
-        return list[rnd.btwn(0, list.length)];
-    }
-};
-
-/*LETTER DRAWING*/
-
-function drawLetter(char) {
-    ctx.font = char.size + "px " + char.font;
-    ctx.fillStyle = char.color;
-
-    var x = char.posX + (mouseX - canvas.width / 2) * char.coef;
-    var y = char.posY + (mouseY - canvas.height / 2) * char.coef;
-
-    ctx.fillText(char.char, x, y);
+const ondown = e =>{
+    //check and register mouse position
+    parallaxBox.dataset.mouseDownAtX = e.clientX;
+    parallaxBox.dataset.mouseDownAtY = e.clientY;
 }
 
-/*ANIMATION*/
+const onenter = e =>{
+    parallaxBox.dataset.mouseDownAtX = e.clientX;
+    parallaxBox.dataset.mouseDownAtY = e.clientY;
+}
 
-document.onmousemove = function (ev) {
-    mouseX = ev.pageX - canvas.offsetLeft;
-    mouseY = ev.pageY - canvas.offsetTop;
+const onmove = e =>{
+    const mouseDeltaX = parseFloat(parallaxBox.dataset.mouseDownAtX) - e.clientX,
+    mouseDeltaY = parseFloat(parallaxBox.dataset.mouseDownAtY) - e.clientY,
+    maxDeltaX = parallaxBox.clientWidth,
+    maxDeltaY = parallaxBox.clientHeight;
 
-    if (window.requestAnimationFrame) {
-        requestAnimationFrame(update);
-    } else {
-        update();
-    }
+    const percentageX = Math.max(Math.min(((mouseDeltaX / maxDeltaX)*100),50),0),
+    percentageY = Math.max(Math.min(((mouseDeltaY / maxDeltaY)*100),50),0);
+    //console.log('percentage-x: ',percentageX , 'percentage-y: ',percentageY);
+    parallaxBox.animate({
+        backgroundPosition:`${100 - percentageX-40}% ${100 - percentageY-40}%`
+    },{duration:1200, fill:'forwards'});
+}
+
+
+const onup = e =>{
+    parallaxBox.dataset.mouseDownAtX = '0';
+    parallaxBox.dataset.mouseDownAtY = '0';
+}
+const onleave = e =>{
+    parallaxBox.dataset.mouseDownAtX = '0';
+    parallaxBox.dataset.mouseDownAtY = '0';
+}
+
+parallaxBox.onmouseenter = e =>onenter(e);
+parallaxBox.onmouseleave = e =>onleave(e);
+
+parallaxBox.onmousemove = e =>onmove(e);
+parallaxBox.ontouchmove = e =>onmove(e.touches[0]);
+
+parallaxBox.ontouchstart = e =>ondown(e.touches[0]);
+
+parallaxBox.ontouchend = e =>onup(e.touches[0]);
+
+
+
+
+
+
+
+
+//Project Name animation
+
+const changingLetters = "abcdefghijklmnopqrstuvwxyz";
+
+let interval = null;
+
+document.querySelector('#project-name').onmouseover = event =>{
+    let iteration = 0;
+
+    clearInterval(interval);
+
+    interval = setInterval(()=>{
+        event.target.innerText = event.target.innerText.split('').map((letter,index)=>{if(index<iteration){return event.target.dataset.name[index];}return changingLetters[Math.floor(Math.random()*26)]}).join('');
+        if (iteration >= event.target.dataset.name.length){clearInterval(interval);}
+        iteration+=1/3;
+    }, 50);
 };
-
-function update() {
-    clear();
-    render();
-}
-
-function clear() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-}
-
-function render() {
-    for (var i = 0; i < characters.length; i++) {
-        drawLetter(characters[i]);
-    }
-}
-
-/*INITIALIZE*/
-
-function createLetters() {
-    for (var i = 0; i < layers.n; i++) {
-        for (var j = 0; j < layers.letters[i]; j++) {
-            var character = rnd.choose(characterList);
-            var x = rnd.btwn(0, canvas.width);
-            var y = rnd.btwn(0, canvas.height);
-
-            characters.push({
-                char: character,
-                font: layers.font,
-                size: layers.size[i],
-                color: layers.color[i],
-                layer: i,
-                coef: layers.coef[i],
-                posX: x,
-                posY: y
-            });
-        }
-    }
-}
-
-createLetters();
-update();
-
-/*REAJUST CANVAS AFTER RESIZE*/
-
-window.onresize = function () {
-    //location.reload();
-};
-
-document.getElementById("close").onclick = function () {
-    this.parentElement.style.visibility = "hidden";
-    this.parentElement.style.opacity = "0";
-};
-
-
