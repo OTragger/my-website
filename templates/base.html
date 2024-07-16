@@ -20,7 +20,7 @@
     <title>Oswald Houndekon | {{page_title}} </title>
 </head>
 
-<body class='bg-black text-light'>
+<body {% if project.projectMainColor %}style="background-color:{{project.projectMainColor}};" class='text-light'{% else %}class='bg-black text-light'{% endif %} >
     <div class="wrapper">
         <img src="" class="wrapper-content-container">
         <div class="progress">
@@ -41,8 +41,8 @@
             </div>
         </div>
     </div>
-    <div class="back-to-top d-flex justify-content-center align-items-center p-3">
-        <a href="#my-nav"><span class="text-white fs-2"><i class="bi bi-arrow-up-circle"></i></span></a>
+    <div id="button-play-pause" class="back-to-top d-flex justify-content-center align-items-center p-3">
+        <span class="text-white fs-2"><i id="play-pause-icon" class="m-2 bi bi-music-note-list"></i></span>
     </div>
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-black" id="my-nav">
         <div class="container-fluid">
@@ -52,14 +52,14 @@
                         <div class="row justify-content-start align-items-center text-center">
                             <div class="col-md-2 p-2">
                                 <span class="my-tool-tip" data-bs-placement="top" title="Follow me on facebook">
-                                    <a class="my-link" target="_blank" rel="noopener noreferrer" href="https://www.facebook.com/oswaldtragger/">
+                                    <a class="my-link" target="_blank" rel="noopener noreferrer" href="https://www.facebook.com/oswaldhdk/">
                                         <img width="10" src="{% static 'fb-icon.svg' %}" alt="">
                                     </a>
                                 </span>
                             </div>
                             <div class="col-md-2 p-2">
                                 <span class="my-tool-tip" data-bs-placement="top" title="Follow me on instagram">
-                                    <a class="my-link" target="_blank" rel="noopener noreferrer" href="https://www.instagram.com/oswaldtragger/">
+                                    <a class="my-link" target="_blank" rel="noopener noreferrer" href="https://www.instagram.com/oswaldhdk/">
                                         <img width="16" src="{% static 'ig-icon.svg' %}" alt="">
                                     </a>
                                 </span>
@@ -80,7 +80,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col text-center">
+                    <div class="col text-md-center">
                         <a class="navbar-brand" href="{% url 'homepage' %}"><img class="logo-white" src="{% static 'web-logo.svg' %}" alt=""></a>
                     </div>
                     <div class="col">
@@ -137,12 +137,12 @@
                     <div class="row justify-content-center justify-content-md-end my-2 text-center text-md-end">
                         <div class="col">
                             <div class="d-flex justify-content-center justify-content-md-end align-items-center">
-                                <a class="my-link" target="_blank" rel="noopener noreferrer" href="https://www.facebook.com/oswaldtragger/">
+                                <a class="my-link" target="_blank" rel="noopener noreferrer" href="https://www.facebook.com/oswaldhdk/">
                                     <span class="my-tool-tip" data-bs-placement="top" title="Follow me on facebook">
                                         <img class="m-3" width="10" src="{% static 'fb-icon.svg' %}" alt="">
                                     </span>
                                 </a>
-                                <a class="my-link" target="_blank" rel="noopener noreferrer" href="https://www.instagram.com/oswaldtragger/">
+                                <a class="my-link" target="_blank" rel="noopener noreferrer" href="https://www.instagram.com/oswaldhdk/">
                                     <span class="my-tool-tip" data-bs-placement="top" title="Follow me on instagram">
                                         <img class="m-3" width="16" src="{% static 'ig-icon.svg' %}" alt="">
                                     </span>
@@ -165,7 +165,8 @@
 
                 </div>
             </div>
-            <p class="pt-5 text-light text-center">Copyright © 2022 Oswald Houndekon All rights reserved.</p>
+            <audio id='audio-player' src="{% static 'audio/audio.mp3' %}" loop autoplay></audio>
+            <p class="pt-5 text-light text-center">Copyright © <script>document.write(new Date().getFullYear());</script> Oswald Houndekon All rights reserved.</p>
         </div>
     </section>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>

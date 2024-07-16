@@ -16,8 +16,8 @@
                         <div class="py-5 d-none d-lg-block"></div>
                     </div>
                     <div class="col-md-6 text-center py-5">
-                        <h1 class="display-2 fw-bolder playfair">Branding</h1>
-                        <h1 class="display-2 fw-bolder text-orange playfair">Connaisseur</h1>
+                        <h1 class="display-2 fw-bolder playfair">I am</h1>
+                        <h1 class="display-2 fw-bolder playfair"><span class='text-orange'>O</span>swald <span class='text-orange'>H</span>oundekon</h1>
                         <img width="300" class="text-danger" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="3200" src="{% static 'scratch.svg' %}" alt="">
                     </div>
                     <div class="col-md-3" data-aos="fade-left"  data-aos-delay="2400">
@@ -195,13 +195,25 @@
     <div class="container text-center">
         <p class="h1 cormorant">My work</p>
         <img width="80" src="{% static 'scratch.svg' %}" alt="">
-        <div class="py-5" id="imagery">
+        <div class="py-5" id="">
             <div class="image-container">
-                {% for work in works %}
+                {% comment %} {% for work in works %}
                         <a data-aos="fade-down" href="{% url 'projects:details' slug=work.slug %}">
                             <img class="rounded proj" src="{{ work.mainImage.url }}" alt="">
                         </a>
-                {% endfor %}    
+                {% endfor %}     {% endcomment %}
+
+                <ul class="list-group playfair">
+                    {% for work in works %}
+                        <a data-aos="fade-down" class="link-underline-opacity-0" href="{% url 'projects:details' slug=work.slug %}">
+                            <li class="bg-transparent text-light fs-1 py-4 list-group-item d-flex justify-content-between align-items-start">
+                                <div>{{work.title}}</div>
+                                <span><i class="bi bi-eye"></i></span>
+                            </li>
+                        </a>
+                    {% endfor %}  
+                    
+                </ul>
             </div>      
         </div>
     </div>

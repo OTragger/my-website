@@ -6,6 +6,11 @@
     <div class="container pt-md-3 text-center">
         <p class="h1 cormorant">My <br> <span class="text-orange">Work</span></p>
         <img class="pb-3" width="80" src="{% static 'scratch.svg' %}" alt="">
+        <div class="py-3">
+            {% for category in categories %}
+                <a class="btn btn-outline fs-sm-6 fs-4 text-light badge">{{category.name}}</a>
+            {% endfor %}
+        </div>
         <div class="py-5" id="imagery">
             <div class="image-container">
                 {% for project in projects %}

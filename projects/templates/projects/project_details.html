@@ -29,7 +29,14 @@
                                 </div>
                                 <div class="col-6">
                                     <p class="fs-4 playfair m-0">Contributors</p>
-                                    <p class="fs-6">{{contributors}}</p>
+                                    <div>
+                                        {% for contributor in contributors %}
+                                        <span class="my-tool-tip" data-bs-placement="bottom" title="{{contributor.name}}">
+                                            <img style="max-width:30px; border:1px solid white; border-radius:100px!important;" src="{{contributor.picture.url}}" class="rounded float-start" alt="{{contributor.name}}">
+                                        </span>
+                                            {% endfor %}
+                                    </div>    
+                                    {% comment %} <p class="fs-6">{{contributors}}</p> {% endcomment %}
                                 </div>
                             </div>
                             <div class="my-2">
@@ -41,7 +48,7 @@
                     </div>
                 </div>
                 <div class="col-12 col-lg-8">
-                    <p class="fs-3 fw-bold">Project Summary</p>
+                    <p class="fs-3 fw-bold" data-aos="fade-up" data-aos-delay="100">Project Summary</p>
                     <p>{{project.summary|linebreaks}}</p>
                     {% if project.website != '' %}
                         <a href={{project.website}} class="text-orange">Visit their website <i class="bi bi-arrow-right"></i></a>
@@ -52,7 +59,7 @@
         <div class="pb-5 container" id="imagery">
             <div class="image-container">
                 {% for projectImage in projectImages %}
-                    <img class="rounded proj-img" src="{{ projectImage.url }}" alt="{{ projectImage.name }}">
+                    <img data-aos="fade-up" data-aos-delay="100" class="rounded proj-img" src="{{ projectImage.url }}" alt="{{ projectImage.name }}">
                 {% endfor %}
             </div>
         </div>

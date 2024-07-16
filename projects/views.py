@@ -6,7 +6,10 @@ from .models import *
 # Create your views here.
 def projects(request):
     project_list = Project.objects.all()
-    return render(request, 'projects/projects.html', {'projects':project_list, 'page_title':'Projects'})
+    categories_list = Category.objects.all()
+
+    context = {'projects':project_list, 'page_title':'Projects', 'categories':categories_list}
+    return render(request, 'projects/projects.html', context)
 
 
 def project_details(request, slug):
@@ -29,7 +32,9 @@ def project_details(request, slug):
     #get a of their thumbs
     thumbs = [i.thumb for i in projectImages]
     
-    contributors = ', '.join([str(i) for i in Contributor.objects.filter(project = project.id)])
+    contributors = Contributor.objects.filter(project = project.id)
+    print(contributors)
+    #contribs = ', '.join([str(i) for i in Contributor.objects.filter(project = project.id)])
     category = ', '.join([str(a) for a in Category.objects.filter(project = project.id)])
     tags = ', '.join([str(a) for a in Tag.objects.filter(project = project.id)])
     
