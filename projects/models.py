@@ -41,6 +41,7 @@ class Project(models.Model):
     client = models.CharField(max_length= 50)
     category = models.ManyToManyField(Category)
     date = models.DateField()
+    projectMainColor = models.CharField(max_length=20, blank=True)
     website = models.URLField(max_length= 50, blank=True)
     contributors = models.ManyToManyField(Contributor)
     mainImage = models.ImageField(upload_to = main_image_upload, blank = True)

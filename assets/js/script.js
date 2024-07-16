@@ -1,6 +1,27 @@
 //Oswald HOUNDEKON 2022
 
 
+//////////////Audio file play-pause
+const audioElement = document.getElementById("audio-player");
+const playButton = document.getElementById("button-play-pause");
+const playicon = document.getElementById("play-pause-icon");
+
+function togglePlay() {
+  if (audioElement.paused) {
+    audioElement.play();
+    playicon.classList.remove("bi-music-note");
+    playicon.classList.add("bi-music-note-list");
+  } else {
+    audioElement.pause();
+    playicon.classList.remove("bi-music-note-list");
+    playicon.classList.add("bi-music-note");
+    
+  }
+}
+
+playButton.addEventListener("click", togglePlay);
+
+
 
 
 
