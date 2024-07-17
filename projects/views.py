@@ -33,7 +33,6 @@ def project_details(request, slug):
     thumbs = [i.thumb for i in projectImages]
     
     contributors = Contributor.objects.filter(project = project.id)
-    print(contributors)
     #contribs = ', '.join([str(i) for i in Contributor.objects.filter(project = project.id)])
     category = ', '.join([str(a) for a in Category.objects.filter(project = project.id)])
     tags = ', '.join([str(a) for a in Tag.objects.filter(project = project.id)])

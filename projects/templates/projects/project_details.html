@@ -57,6 +57,9 @@
             </div>
         </div>
         <div class="pb-5 container" id="imagery">
+            <div id="head_img" class="w-100" ata-aos="fade-up" data-aos-delay="100" >
+                <img src="{{ project.headImage.url }}" class="rounded" alt="{{ project.title }}">
+            </div>
             <div class="image-container">
                 {% for projectImage in projectImages %}
                     <img data-aos="fade-up" data-aos-delay="100" class="rounded proj-img" src="{{ projectImage.url }}" alt="{{ projectImage.name }}">

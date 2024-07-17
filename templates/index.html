@@ -152,7 +152,7 @@
             <div class="container w-md-100 w-lg-75">
                 <div class="row justify-content-center align-items-center">
                     <div class="col-12 col-md d-flex justify-content-start justify-content-md-end">
-                        <img class="w-50" data-aos="fade-right" src="{% static 'header-background.png' %}" alt="">
+                        <img class="w-50" data-aos="fade-right" src="{% static 'header-background.png' %}" alt="img-oswaldhoundekon">
                     </div>
                     <div class="col-12 col-md text-start">
                         <div class="w-100 here_i_am_p">
@@ -207,7 +207,7 @@
                     {% for work in works %}
                         <a data-aos="fade-down" class="link-underline-opacity-0" href="{% url 'projects:details' slug=work.slug %}">
                             <li class="bg-transparent text-light fs-1 py-4 list-group-item d-flex justify-content-between align-items-start">
-                                <div>{{work.title}}</div>
+                                <p>{{work.title}}</p>
                                 <span><i class="bi bi-eye"></i></span>
                             </li>
                         </a>

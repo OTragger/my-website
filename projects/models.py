@@ -36,6 +36,11 @@ class Project(models.Model):
         new_pp = '{}_{}_{}.{}'.format(instance.client,instance.title,'main_image','jpg')
         return 'projects/{}/{}'.format(instance.title, new_pp)
     
+    def head_image_upload(instance, filename):
+        #this should return the os.path.join('media/projects/userxx')
+        new_pp = '{}_{}_{}.{}'.format(instance.client,instance.title,'head_image','jpg')
+        return 'projects/{}/{}'.format(instance.title, new_pp)
+    
     title = models.CharField(max_length=100)
     summary = models.TextField()
     client = models.CharField(max_length= 50)
@@ -45,6 +50,7 @@ class Project(models.Model):
     website = models.URLField(max_length= 50, blank=True)
     contributors = models.ManyToManyField(Contributor)
     mainImage = models.ImageField(upload_to = main_image_upload, blank = True)
+    headImage = models.ImageField(upload_to = head_image_upload, blank = True)
     slug = models.SlugField(default='link')
     tags = models.ManyToManyField(Tag, blank=True)
     
