@@ -5,7 +5,7 @@ from .models import *
 
 # Create your views here.
 def projects(request):
-    project_list = Project.objects.all()
+    project_list = Project.objects.all().order_by('?')
     categories_list = Category.objects.all()
 
     context = {'projects':project_list, 'page_title':'Projects', 'categories':categories_list}
@@ -28,7 +28,7 @@ def project_details(request, slug):
     
     
     #get instances of projectImages
-    projectImages = ProjectImages.objects.filter(project=project.id)
+    projectImages = ProjectImages.objects.filter(project=project.id).order_by('?')
     #get a of their thumbs
     thumbs = [i.thumb for i in projectImages]
     
